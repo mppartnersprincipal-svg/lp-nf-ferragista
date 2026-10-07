@@ -1,6 +1,8 @@
 # LP Nova Ferragista — build estático
 
-Página única (`index.html`) + `assets/` (imagens WebP e vídeos). Sem build, sem dependências: é só publicar esta pasta em qualquer hospedagem estática. No ar em https://www.novaferragista.com.br (Vercel).
+Página única (`site/index.html`) + `site/assets/` (imagens WebP e vídeos), sem build. No ar em https://www.novaferragista.com.br (Vercel, deploy automático a cada push na `main`).
+
+Painel de métricas em **/dashboard** (coleta própria + GA4 + Google Ads): ver [DASHBOARD.md](DASHBOARD.md).
 
 ## Dados já preenchidos (fonte: Google Meu Negócio + Instagram)
 
@@ -11,7 +13,7 @@ Página única (`index.html`) + `assets/` (imagens WebP e vídeos). Sem build, s
 - Maps: link de busca do Google Maps (trocar pelo link "Compartilhar" da ficha, se preferir)
 - Selo "4,7 no Google · 119 avaliações" na barra de confiança — **atualizar periodicamente**
 
-## Ainda falta (buscar `{{` no `index.html`)
+## Ainda falta (buscar `{{` no `site/index.html`)
 
 | Placeholder | O que é |
 |---|---|

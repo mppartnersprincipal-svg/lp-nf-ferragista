@@ -1,0 +1,10 @@
+# Só site/ (estático) e api/ (Functions) vão para a Vercel. Material interno fica fora do deploy.
+/supabase/
+/gtm/
+/tests/
+/scripts/
+/README.md
+/DASHBOARD.md
+/.env.example
+/.gitignore
+node_modules/

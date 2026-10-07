@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0E0E0E">
+  <title>Dashboard · Nova Ferragista</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@600&display=swap">
+  <style>
+    :root{
+      /* Design System Nova Ferragista: nomes das variáveis herdados do painel da Construbloc, valores da Nova */
+      --cb-blue-900:#0E0E0E;--cb-blue-700:#1F1F1F;--cb-blue-600:#780018;--cb-blue-500:#A3324A;--cb-blue-100:#EFE7E8;--cb-blue-50:#F7F2F2;
+      --cb-gold-600:#C9A500;--cb-gold-500:#E8C008;--cb-gold-400:#F2D23A;--cb-gold-100:#FFF8D6;
+      --cb-ink-900:#151515;--cb-ink-700:#3F3F3F;--cb-ink-500:#6B6B6B;--cb-ink-300:#B5B5B5;--cb-line-200:#E6E6E6;--cb-surface-100:#F4F4F2;--cb-white:#fff;
+      --ok:#1E8E3E;--danger:#C62828;--wa:#25D366;
+      --font-display:"Oswald","Arial Narrow",sans-serif;
+      --font-body:"Barlow","Helvetica Neue",Arial,sans-serif;
+      --font-label:"Barlow Condensed","Arial Narrow",sans-serif;
+      --radius:10px;--shadow:0 1px 2px rgba(14,14,14,.08);--focus:0 0 0 3px rgba(232,192,8,.55);
+      --gradient-gold:linear-gradient(90deg,#FBE88A 0%,#E8C008 100%);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--cb-surface-100);color:var(--cb-ink-700);font:400 15px/1.55 var(--font-body);-webkit-font-smoothing:antialiased}
+    a{color:var(--cb-blue-600)}
+    button,input,select{font-family:inherit}
+    :focus-visible{outline:none;box-shadow:var(--focus)}
+    .wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+    @media(min-width:768px){.wrap{padding:0 24px}}
+    h1,h2,h3{font-family:var(--font-display);font-weight:600;text-transform:uppercase;color:var(--cb-blue-600);margin:0;letter-spacing:.01em}
+    h2{font-size:24px}
+    h3{font-size:17px}
+    .muted{color:var(--cb-ink-500)}
+    .hidden{display:none!important}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 20px;border-radius:6px;border:1px solid var(--cb-line-200);background:#fff;color:var(--cb-blue-600);font:600 13px var(--font-body);text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s}
+    .btn:hover{border-color:var(--cb-blue-600)}
+    .btn--gold{background:var(--cb-gold-500);border-color:var(--cb-gold-500);color:var(--cb-blue-900)}
+    .btn--gold:hover{background:var(--cb-gold-400);border-color:var(--cb-gold-400)}
+    .btn--sm{min-height:36px;padding:6px 14px;font-size:12px}
+    .btn--ghost{background:transparent;border-color:rgba(255,255,255,.35);color:#fff}
+    .btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+
+    /* Login */
+    #login{min-height:100svh;display:grid;place-items:center;padding:16px;background:linear-gradient(135deg,#0E0E0E 0%,#3D000C 100%)}
+    .login-card{width:100%;max-width:400px;padding:36px 28px;border-radius:12px;text-align:center;background:#fff;box-shadow:0 16px 40px rgba(14,14,14,.35);border-top:6px solid var(--cb-gold-500)}
+    .login-card img{height:72px;width:72px;border-radius:14px;margin-bottom:14px}
+    .login-card p{margin:6px 0 22px;font-size:14px}
+    .field{width:100%;min-height:48px;padding:12px 14px;border-radius:6px;border:1px solid var(--cb-line-200);background:#fff;color:var(--cb-ink-900);font:400 16px var(--font-body);outline:none}
+    .field:focus{border-color:var(--cb-blue-600);box-shadow:var(--focus)}
+    .error{color:var(--danger);font-size:13px;min-height:20px;margin:10px 0 0}
+
+    /* Topo */
+    .top{position:sticky;top:0;z-index:20;background:var(--cb-blue-900);color:#fff;box-shadow:0 6px 18px rgba(14,14,14,.18)}
+    .top::after{content:"";display:block;height:4px;background:var(--gradient-gold)}
+    .top .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .brand img{height:38px;width:38px;border-radius:8px}
+    .brand span{font-family:var(--font-display);font-weight:600;text-transform:uppercase;font-size:18px;color:#fff;white-space:nowrap}
+    @media(max-width:420px){.brand span{display:none}}
+    .top-actions{display:flex;gap:8px;align-items:center}
+    .secnav{display:flex;gap:4px;overflow-x:auto;padding:8px 0 10px;scrollbar-width:none}
+    .secnav::-webkit-scrollbar{display:none}
+    .secnav a{white-space:nowrap;font:600 13px var(--font-label);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.72);padding:6px 10px;border-radius:4px}
+    .secnav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+
+    /* Filtros */
+    .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:18px 0}
+    .chip{min-height:36px;padding:6px 14px;border-radius:999px;border:1px solid var(--cb-line-200);background:#fff;color:var(--cb-ink-700);font:600 13px var(--font-body);cursor:pointer;transition:all .15s}
+    .chip:hover{border-color:var(--cb-blue-600);color:var(--cb-blue-600)}
+    .chip.is-active{background:var(--cb-blue-600);border-color:var(--cb-blue-600);color:#fff}
+    .filters input[type=date],.filters select{min-height:36px;padding:6px 10px;border-radius:6px;border:1px solid var(--cb-line-200);background:#fff;color:var(--cb-ink-900);font:400 14px var(--font-body);max-width:100%}
+    .filters .spacer{flex:1}
+    .updated{font-size:13px;color:var(--cb-ink-500)}
+
+    /* Cards */
+    .kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:4px 0 24px}
+    @media(min-width:900px){.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    .card .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .kpi{background:#fff;border:1px solid var(--cb-line-200);border-left:4px solid var(--cb-blue-600);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);min-width:0}
+    .kpi.gold{border-left-color:var(--cb-gold-500)}
+    .kpi .lbl{font:600 12px var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--cb-ink-500)}
+    .kpi .val{font-family:var(--font-display);font-weight:600;font-size:28px;line-height:1.15;color:var(--cb-blue-900);margin:6px 0 2px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+    .kpi .hint{font-size:12px;color:var(--cb-ink-500)}
+    .kpi .delta{font-size:12px;font-weight:600}
+    .delta.up{color:var(--ok)}.delta.down{color:var(--danger)}
+    .grid{display:grid;gap:16px;margin-bottom:24px;min-width:0}
+    .grid>*{min-width:0}
+    @media(min-width:900px){.g-2{grid-template-columns:2fr 1fr}.g-3{grid-template-columns:repeat(3,1fr)}.g-11{grid-template-columns:1fr 1fr}}
+    .card{background:#fff;border:1px solid var(--cb-line-200);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
+    .block>.card+.card,.block>.card+.grid{margin-top:16px}
+    #ga4-body>.card+.card,#ga4-body>.card+.grid{margin-top:16px}
+    .card header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+    .card header p{margin:2px 0 0;font-size:13px;color:var(--cb-ink-500)}
+    .chart{position:relative;height:260px}
+    .chart--tall{height:320px}
+    section.block{padding-top:12px;margin-bottom:12px;scroll-margin-top:130px}
+    section.block>h2{margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--cb-line-200)}
+    section.block>.lead{margin:-6px 0 14px;font-size:14px;color:var(--cb-ink-500)}
+
+    /* Barras / tabelas */
+    .bars{display:flex;flex-direction:column;gap:10px}
+    .bars h4{margin:0;font:600 12px var(--font-label);letter-spacing:.08em;text-transform:uppercase;color:var(--cb-ink-500)}
+    .bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:14px}
+    .bar .name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--cb-ink-900)}
+    .bar .track{grid-column:1/-1;height:8px;border-radius:999px;background:var(--cb-blue-50);overflow:hidden}
+    .bar .fill{height:100%;background:var(--cb-blue-600);border-radius:999px;transition:width .6s}
+    .bars.gold .fill{background:var(--cb-gold-500)}
+    .bar .num{color:var(--cb-ink-700);font-variant-numeric:tabular-nums;font-weight:600}
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th{font:600 12px var(--font-label);letter-spacing:.06em;text-transform:uppercase;color:var(--cb-ink-500);text-align:left;padding:8px 10px;border-bottom:2px solid var(--cb-line-200);white-space:nowrap}
+    td{padding:9px 10px;border-bottom:1px solid var(--cb-line-200);color:var(--cb-ink-900);vertical-align:top}
+    td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+    .tbl-wrap{overflow-x:auto}
+    .empty{padding:24px;text-align:center;color:var(--cb-ink-500);font-size:14px}
+    .note{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--cb-line-200);font-size:12px;line-height:1.7;color:var(--cb-ink-500)}
+    .state{padding:18px;border-radius:8px;background:var(--cb-blue-50);border:1px dashed var(--cb-blue-500);font-size:14px}
+    .state.err{background:#FDECEC;border-color:var(--danger)}
+    .state b{display:block;color:var(--cb-blue-900);margin-bottom:4px}
+    .state.err b{color:var(--danger)}
+    .tag{display:inline-block;padding:2px 8px;border-radius:999px;font:600 11px var(--font-body);border:1px solid var(--cb-line-200);color:var(--cb-ink-700);white-space:nowrap}
+    .tag.ads{background:var(--cb-blue-600);border-color:var(--cb-blue-600);color:#fff}
+    .tag.on{background:#E6F4EA;border-color:#A8D5B5;color:#157a3d}
+    .tag.off{background:var(--cb-surface-100);color:var(--cb-ink-500)}
+    .tag.rm{background:#FDECEC;border-color:#F3B4B4;color:var(--danger)}
+    .tag.gold{background:var(--cb-gold-100);border-color:var(--cb-gold-500);color:var(--cb-blue-900)}
+    .tag.wa{background:#E6F4EA;border-color:#A8D5B5;color:#157a3d}
+    .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+
+    /* Funil */
+    .funnel{display:flex;flex-direction:column;gap:8px}
+    .funnel .step{display:grid;grid-template-columns:170px minmax(0,1fr) 48px;gap:10px;align-items:center;font-size:14px}
+    .funnel .step .track{height:24px;border-radius:4px;background:var(--cb-blue-50);overflow:hidden}
+    .funnel .step .fill{height:100%;background:linear-gradient(90deg,#0E0E0E,#780018);display:flex;align-items:center;padding-left:8px;font-size:12px;color:#fff;transition:width .6s;white-space:nowrap}
+    .funnel .step .num{text-align:right;font-weight:600}
+    @media(max-width:600px){.funnel .step{grid-template-columns:105px minmax(0,1fr) 42px;font-size:13px}}
+
+    /* Heatmap */
+    .heat-wrap{overflow-x:auto}
+    .heat{display:grid;grid-template-columns:40px repeat(24,minmax(14px,1fr));gap:3px;font-size:10px;color:var(--cb-ink-500);min-width:440px}
+    .heat .c{aspect-ratio:1;border-radius:3px;background:var(--cb-blue-50)}
+    .heat .h{text-align:center}
+    .heat .d{display:flex;align-items:center}
+
+    /* Jornadas */
+    .journey{border:1px solid var(--cb-line-200);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px;background:#fff}
+    .journey .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--cb-ink-500);margin-bottom:10px}
+    .journey .meta b{color:var(--cb-ink-900);font-weight:600}
+    .trail{display:flex;flex-wrap:wrap;gap:6px}
+    .trail span{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--cb-line-200);color:var(--cb-ink-700);background:#fff}
+    .trail span.wa{background:var(--wa);border-color:var(--wa);color:#062B16;font-weight:600}
+    .trail span.calc{background:var(--cb-gold-100);border-color:var(--cb-gold-500);color:var(--cb-blue-900)}
+    .trail span.section{border-color:var(--cb-blue-100);background:var(--cb-blue-50);color:var(--cb-blue-600)}
+    .trail span.page{background:var(--cb-blue-600);border-color:var(--cb-blue-600);color:#fff}
+    .trail span.leave{opacity:.6}
+
+    /* Live */
+    .live{display:flex;flex-direction:column;gap:6px;max-height:420px;overflow:auto}
+    .live .ev{display:grid;grid-template-columns:54px minmax(0,1fr);gap:4px 12px;font-size:13px;padding:8px 10px;border-radius:6px;background:var(--cb-surface-100)}
+    .live .ev time{color:var(--cb-ink-500);font-variant-numeric:tabular-nums}
+    .live .ev .who{grid-column:2;color:var(--cb-ink-500);font-size:12px}
+    @media(min-width:700px){.live .ev{grid-template-columns:54px minmax(0,1fr) auto}.live .ev .who{grid-column:auto}}
+    .pulse{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--ok);margin-right:10px;vertical-align:middle;animation:pulse 1.6s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+    @media(prefers-reduced-motion:reduce){.pulse{animation:none}.bar .fill,.funnel .step .fill{transition:none}}
+    footer.foot{padding:36px 0;text-align:center;font:600 12px var(--font-label);letter-spacing:.12em;text-transform:uppercase;color:var(--cb-ink-500)}
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN -->
+  <div id="login">
+    <form class="login-card" id="login-form" autocomplete="off">
+      <img src="/assets/img/logo-nf-320.webp" alt="Nova Ferragista">
+      <h1 style="font-size:22px">Dashboard</h1>
+      <p class="muted">Comportamento dos visitantes da landing page</p>
+      <input class="field" type="password" id="pwd" placeholder="Senha de acesso" aria-label="Senha de acesso" required autofocus>
+      <p class="error" id="login-error" role="alert"></p>
+      <button class="btn btn--gold" type="submit" style="width:100%">Entrar</button>
+    </form>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="hidden">
+    <div class="top">
+      <div class="wrap bar">
+        <div class="brand"><img src="/assets/img/logo-nf-96.webp" alt="Nova Ferragista"><span>Dashboard</span></div>
+        <div class="top-actions">
+          <a class="btn btn--sm btn--ghost" href="/" target="_blank" rel="noopener">Ver site</a>
+          <button class="btn btn--sm btn--ghost" type="button" id="logout">Sair</button>
+        </div>
+      </div>
+      <div class="wrap">
+        <nav class="secnav" aria-label="Seções do painel">
+          <a href="#visao">Visão geral</a><a href="#contatos">Contatos</a><a href="#google-ads">Google Ads</a><a href="#ga4">GA4</a><a href="#campanhas">Campanhas</a><a href="#leitura">Leitura</a><a href="#faq">FAQ</a><a href="#jornadas">Jornadas</a><a href="#quando">Quando</a><a href="#onde">Onde</a><a href="#cliques">Cliques</a><a href="#publico">Público</a><a href="#aovivo">Ao vivo</a>
+        </nav>
+      </div>
+    </div>
+
+    <main class="wrap">
+      <div class="filters" id="filters">
+        <button class="chip" data-periodo="hoje">Hoje</button>
+        <button class="chip" data-periodo="7d">7 dias</button>
+        <button class="chip is-active" data-periodo="30d">30 dias</button>
+        <button class="chip" data-periodo="90d">90 dias</button>
+        <input type="date" id="de" aria-label="De"> <input type="date" id="ate" aria-label="Até">
+        <select id="origem" aria-label="Origem">
+          <option value="todas">Todas as origens</option>
+          <option value="google_ads">Google Ads</option>
+          <option value="google_organic">Google (orgânico)</option>
+          <option value="instagram">Instagram</option>
+          <option value="meta_ads">Meta Ads</option>
+          <option value="facebook">Facebook</option>
+          <option value="search_other">Outros buscadores</option>
+          <option value="direct">Direto</option>
+          <option value="referral">Indicação</option>
+          <option value="other">Outro</option>
+        </select>
+        <span class="spacer"></span>
+        <span class="updated" id="updated" aria-live="polite"></span>
+      </div>
+
+      <section class="block" id="visao">
+        <div class="kpis" id="kpis"></div>
+        <div class="grid g-2">
+          <div class="card"><header><div><h3>Visitas por dia</h3><p>Sessões, cliques no WhatsApp e ligações</p></div></header><div class="chart chart--tall"><canvas id="c-daily" role="img" aria-label="Visitas por dia"></canvas></div></div>
+          <div class="card"><header><div><h3>Origem</h3><p>Todas as visitas do período (ignora o filtro de origem)</p></div></header><div class="chart chart--tall"><canvas id="c-channels" role="img" aria-label="Origem das visitas"></canvas></div></div>
+        </div>
+        <div class="grid g-11">
+          <div class="card"><header><h3>Dispositivo</h3></header><div class="chart"><canvas id="c-devices" role="img" aria-label="Dispositivos"></canvas></div></div>
+          <div class="card"><header><h3>Novo × recorrente</h3></header><div class="chart"><canvas id="c-audience" role="img" aria-label="Novos e recorrentes"></canvas></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="contatos">
+        <h2>Contatos: qual botão converte</h2>
+        <p class="lead">WhatsApp e ligação por <code>cta_location</code>, o mesmo parâmetro enviado ao GTM.</p>
+        <div class="grid g-11">
+          <div class="card"><header><div><h3>WhatsApp</h3><p>Onde o clique aconteceu</p></div></header><div class="bars" id="wa-loc"></div></div>
+          <div class="card"><header><div><h3>Ligação</h3><p>Onde o clique aconteceu</p></div></header><div class="bars gold" id="phone-loc"></div></div>
+        </div>
+        <div class="card"><header><div><h3>Botão × origem do visitante</h3><p>WhatsApp e ligação, por canal da sessão</p></div></header><div class="tbl-wrap" id="contact-pivot"></div></div>
+        <div class="card"><header><div><h3>Outros links</h3><p>Rota no Maps, Instagram, avaliações do Google e "Ver categorias"</p></div></header><div class="bars" id="cta-loc"></div></div>
+      </section>
+
+      <section class="block" id="google-ads">
+        <h2>Google Ads</h2>
+        <p class="lead" id="ads-lead">Investimento e resultados das campanhas de anúncios</p>
+        <div id="ads-body"><div class="card"><div class="empty">Carregando…</div></div></div>
+      </section>
+
+      <section class="block" id="ga4">
+        <h2>Google Analytics (GA4)</h2>
+        <p class="lead" id="ga4-lead">Sessões, eventos-chave e origens medidos pelo GA4</p>
+        <div id="ga4-body"><div class="card"><div class="empty">Carregando…</div></div></div>
+      </section>
+
+      <section class="block" id="campanhas">
+        <h2>Campanhas no site</h2>
+        <div class="card"><header><div><h3>Google Ads e UTMs</h3><p>Visitas, WhatsApp e ligações por campanha, grupo/anúncio e termo (gclid/UTM capturados pelo site)</p></div></header><div class="tbl-wrap" id="campaigns"></div>
+          <p class="note">Esta tabela usa o coletor próprio e pode divergir do Google Ads por atribuição, consentimento e processamento. As conversões da seção Google Ads seguem a coluna de conversões da conta.</p></div>
+      </section>
+
+      <section class="block" id="leitura">
+        <h2>Funil de leitura</h2>
+        <div class="card"><header><div><h3>Até onde as pessoas chegam</h3><p id="funnel-sub"></p></div></header>
+          <div class="funnel" id="funnel"></div></div>
+      </section>
+
+      <section class="block" id="faq">
+        <h2>FAQ</h2>
+        <div class="card"><header><div><h3>Perguntas abertas</h3><p>Objeções que aparecem antes do contato</p></div></header><div class="bars" id="faq-bars"></div></div>
+      </section>
+
+      <section class="block" id="jornadas">
+        <h2>Jornadas</h2>
+        <div class="filters" style="padding:0 0 14px">
+          <button class="chip is-active" data-jornadas="conv">Chamaram (WhatsApp ou ligação)</button>
+          <button class="chip" data-jornadas="todas">Todas as sessões</button>
+        </div>
+        <div id="journeys"></div>
+      </section>
+
+      <section class="block" id="quando">
+        <h2>Quando visitam</h2>
+        <div class="card"><header><div><h3>Dia da semana × hora</h3><p id="heat-peak"></p></div></header><div class="heat-wrap"><div class="heat" id="heat"></div></div></div>
+      </section>
+
+      <section class="block" id="onde">
+        <h2>Onde estão</h2>
+        <div class="grid g-11">
+          <div class="card"><header><h3>Cidades</h3></header><div class="bars" id="cities"></div></div>
+          <div class="card"><header><h3>Estados</h3></header><div class="bars" id="regions"></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="cliques">
+        <h2>Tudo que foi clicado</h2>
+        <div class="card"><div class="tbl-wrap" id="clicks"></div></div>
+      </section>
+
+      <section class="block" id="publico">
+        <h2>Público</h2>
+        <div class="grid g-3">
+          <div class="card"><header><h3>Navegadores</h3></header><div class="bars" id="browsers"></div></div>
+          <div class="card"><header><h3>Sistemas</h3></header><div class="bars" id="os"></div></div>
+          <div class="card"><header><div><h3>Consentimento</h3><p>A LP ainda não tem banner de cookies</p></div></header><div class="chart"><canvas id="c-consent" role="img" aria-label="Consentimento"></canvas></div></div>
+        </div>
+      </section>
+
+      <section class="block" id="aovivo">
+        <h2><span class="pulse" aria-hidden="true"></span>Ao vivo</h2>
+        <div class="card"><header><div><h3>Últimos eventos</h3><p>Atualiza a cada 30 s</p></div></header><div class="live" id="live"></div></div>
+      </section>
+    </main>
+    <footer class="foot">Nova Ferragista · Dashboard first-party · M|P Assessoria</footer>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha384-bs/nf9FbdNouRbMiFcrcZfLXYPKiPaGVGplVbv7dLGECccEXDW+S3zjqSKR5ZEaD" crossorigin="anonymous"></script>
+  <script src="/dashboard/app.js"></script>
+</body>
+</html>

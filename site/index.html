@@ -54,6 +54,8 @@
 </script>
 
 <script>document.documentElement.classList.add('js');</script>
+<!-- Coletor first-party do /dashboard (anônimo, independente do GTM) -->
+<script src="/js/tracker.js" defer></script>
 
 <style>
 /* =====================================================================
@@ -561,7 +563,7 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
 </div>
 
 <!-- 3. BARRA DE CONFIANÇA (números) -->
-<section class="section" style="padding-bottom:0" aria-label="Nova Ferragista em números">
+<section class="section" id="numeros" style="padding-bottom:0" aria-label="Nova Ferragista em números">
   <div class="container">
     <div class="stats">
       <div class="stat reveal"><div class="stat__num" data-count="2019" data-plain>2019</div><div class="stat__label">Atendendo a região desde</div></div>
@@ -972,8 +974,9 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
    conversão do Google Ads e demais tags ficam configurados no GTM
    (arquivo de importação em gtm/). Não adicionar gtag/pixel direto aqui.
    Eventos: click_whatsapp (cta_id) · click_cta · click_phone · click_maps
-   · click_instagram · click_reviews · scroll_25/50/75/100 · section_view
+   · click_instagram · click_reviews · faq_open · scroll_25/50/75/100 · section_view
    UTMs da URL de entrada ficam na sessão e seguem junto em cada evento.
+   Cliques e FAQ também vão para o coletor do /dashboard (js/tracker.js).
    ===================================================================== */
 window.NF_TRACKING = { gtmId: 'GTM-KWF7SCQX' };
 
@@ -982,7 +985,10 @@ window.NF_TRACKING = { gtmId: 'GTM-KWF7SCQX' };
   var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
   var SCROLL_MARKS = [25, 50, 75, 100];
   // Zera parâmetros a cada evento: o dataLayer do GTM guarda o último valor
-  var RESET = { cta_id: undefined, section_id: undefined, percent_scrolled: undefined };
+  var RESET = { cta_id: undefined, section_id: undefined, percent_scrolled: undefined, faq_question: undefined };
+  // Nome do evento no coletor do /dashboard (mesmo modelo da Construbloc)
+  var COLLECT = { click_whatsapp: 'whatsapp_click', click_phone: 'phone_click', click_cta: 'cta_click', click_maps: 'cta_click', click_instagram: 'cta_click', click_reviews: 'cta_click', faq_open: 'faq_open' };
+  var COLLECT_LABEL = { click_phone: 'telefone', click_maps: 'maps', click_instagram: 'instagram', click_reviews: 'avaliacoes' };
   window.dataLayer = window.dataLayer || [];
 
   // UTMs: guarda os da URL de entrada e reaproveita durante a sessão
@@ -994,8 +1000,18 @@ window.NF_TRACKING = { gtmId: 'GTM-KWF7SCQX' };
     utms = JSON.parse(sessionStorage.getItem('nf_utms') || '{}');
   } catch (e) { utms = {}; }
 
-  function track(name, params) {
+  function track(name, params, where) {
     dataLayer.push(Object.assign({ event: name }, RESET, utms, params || {}));
+    if (!COLLECT[name] || !window.nfCollect) return;
+    var props = name === 'faq_open' ? params : { cta_location: (params && params.cta_id) || (COLLECT_LABEL[name] + (where ? ' · ' + where : '')) };
+    window.nfCollect(COLLECT[name], props);
+  }
+  // Onde o clique aconteceu: rodapé, header ou seção (id sem "-t")
+  function placeOf(el) {
+    if (el.closest('.footer')) return 'footer';
+    if (el.closest('.header')) return 'header';
+    var sec = el.closest('section');
+    return sec ? (sec.id || (sec.getAttribute('aria-labelledby') || '').replace(/-t$/, '')) : '';
   }
 
   // GTM carrega depois da página, para não pesar na abertura
@@ -1018,7 +1034,15 @@ window.NF_TRACKING = { gtmId: 'GTM-KWF7SCQX' };
     var cta = el.getAttribute('data-cta');
     if (cta) { track('click_whatsapp', { cta_id: cta }); return; }
     var ctaId = el.getAttribute('data-cta-id');
-    track(el.getAttribute('data-track'), ctaId ? { cta_id: ctaId } : {});
+    track(el.getAttribute('data-track'), ctaId ? { cta_id: ctaId } : {}, placeOf(el));
+  });
+
+  // FAQ: pergunta aberta pelo visitante (o clique acontece antes de o <details> abrir)
+  document.querySelectorAll('.faq summary').forEach(function (sum) {
+    sum.addEventListener('click', function () {
+      if (sum.parentElement.open) return;
+      track('faq_open', { faq_question: sum.textContent.replace(/\s+/g, ' ').trim().slice(0, 120) });
+    });
   });
 
   // Profundidade de rolagem: cada marca dispara uma vez por página
