@@ -1,6 +1,6 @@
 # LP Nova Ferragista — build estático
 
-Página única (`index.html`) + `assets/` (imagens WebP e vídeos). Sem build, sem dependências: é só publicar a pasta `site/` em qualquer hospedagem estática.
+Página única (`index.html`) + `assets/` (imagens WebP e vídeos). Sem build, sem dependências: é só publicar esta pasta em qualquer hospedagem estática. No ar em https://www.novaferragista.com.br (Vercel).
 
 ## Dados já preenchidos (fonte: Google Meu Negócio + Instagram)
 
@@ -18,18 +18,40 @@ Página única (`index.html`) + `assets/` (imagens WebP e vídeos). Sem build, s
 | `{{POLITICA_ENTREGA}}` | Resposta do FAQ "Vocês fazem entrega?" |
 | `{{FORMAS_PAGAMENTO}}` | Resposta do FAQ de pagamento |
 | `{{RAZAO_SOCIAL}}`, `{{CNPJ}}` | Rodapé |
-| `{{URL_SITE}}` | Domínio final, sem barra no fim (canonical, OG, schema) |
 | `{{DEPOIMENTO_*}}` | Seção oculta `#depoimentos` — preencher com depoimentos reais e remover `hidden` |
 
-## Rastreamento
+## Rastreamento (ativo desde 07/10/2026)
 
-No fim do `index.html`, em `window.NF_TRACKING`:
+Tudo passa pelo GTM `GTM-KWF7SCQX`. A página só carrega o GTM e envia eventos ao `dataLayer`; não colocar gtag nem pixel direto no HTML.
 
-- **Com GTM (recomendado):** preencha só `gtmId`. Todo clique em CTA de WhatsApp dispara `dataLayer.push({event: 'whatsapp_click', cta_id})`. No GTM, crie o gatilho "Evento personalizado = whatsapp_click" e ligue nele a conversão do Google Ads e o evento `Contact` do Meta Pixel (`Lead` quando `cta_id = cta_orcamento_obra`).
-- **Sem GTM:** preencha `googleAdsId` + `googleAdsLabel` e/ou `metaPixelId`; a página dispara conversão/`Contact`/`Lead` direto.
-- Não preencha os dois modos ao mesmo tempo (conversão contada em dobro).
+Configuração do container: importar [gtm/GTM-KWF7SCQX-importar.json](gtm/GTM-KWF7SCQX-importar.json) (Admin > Importar contêiner > Mesclar). Ele cria:
 
-IDs de origem (`cta_id`): `cta_whatsapp_navbar`, `cta_whatsapp_hero`, `cta_whatsapp_diferenciais`, `cta_whatsapp_categorias`, `cta_orcamento_obra`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp`. Cliques de telefone, Instagram e Maps geram `phone_click`, `instagram_click`, `maps_click`.
+| Tag | Acionador |
+|---|---|
+| GA4 - Google Tag (config) `G-0QJEW1S61L` | All Pages |
+| GA4 - Evento - Eventos da LP (nome = `{{Event}}`, envia `cta_id`, `section_id`, `percent_scrolled` e UTMs) | eventos da tabela abaixo |
+| Google Ads - Conversão - Clique no Botão de Wpp `18487795040` / `Yto-CPqs45QdEOC61e9E` | `click_whatsapp` |
+| Google Ads - Vinculador de conversões | All Pages |
+
+Meta Pixel: ainda não configurado — quando houver, criar no GTM (`Contact` em `click_whatsapp`, `Lead` quando `cta_id = cta_orcamento_obra`).
+
+UTMs da URL de entrada ficam no `sessionStorage` (`nf_utms`) e seguem em todos os eventos da sessão.
+
+Eventos:
+
+| Evento | Quando | Parâmetros |
+|---|---|---|
+| `click_whatsapp` | clique em qualquer botão de WhatsApp | `cta_id` |
+| `click_cta` | "Ver categorias" | `cta_id` |
+| `click_phone`, `click_maps`, `click_instagram`, `click_reviews` | links de telefone, Maps, Instagram e avaliações | — |
+| `scroll_25/50/75/100` | profundidade de rolagem, uma vez por página | `percent_scrolled` |
+| `section_view` | seção cruza o meio da tela, uma vez por seção | `section_id` |
+
+`cta_id` dos botões de WhatsApp: `cta_whatsapp_navbar`, `cta_whatsapp_hero`, `cta_whatsapp_diferenciais`, `cta_whatsapp_categorias`, `cta_orcamento_obra`, `cta_whatsapp_faq`, `cta_whatsapp_final`, `cta_whatsapp_footer`, `fab_whatsapp`.
+
+`section_id`: `topo`, `dores`, `dif`, `categorias`, `obras`, `sobre`, `loja`, `como`, `avaliacoes`, `duvidas`, `final`, `contato`.
+
+Não há formulário na página, então não existe `form_submit`.
 
 ## Mídia
 
