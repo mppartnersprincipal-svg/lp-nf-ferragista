@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Nova Ferragista | Ferragista e materiais de construção em Aparecida de Goiânia</title>
-<meta name="description" content="Ferragista em Aparecida de Goiânia com mais de 10 mil itens: ferragens, ferramentas, hidráulica, elétrica, EPIs e pintura. Atendimento consultivo e preço honesto. Fale no WhatsApp.">
+<title>Nova Ferragista | Ferragista perto de você em Aparecida de Goiânia</title>
+<meta name="description" content="Ferragista em Aparecida de Goiânia com mais de 10 mil itens: tinta spray, espuma expansiva, cola PU, assento sanitário, conexões hidráulicas, disjuntores elétricos e mais. Fale no WhatsApp.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href="https://www.novaferragista.com.br/">
 
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Nova Ferragista">
-<meta property="og:title" content="Nova Ferragista | Tudo o que sua obra precisa">
+<meta property="og:title" content="Nova Ferragista | A ferragista perto de você em Aparecida de Goiânia">
 <meta property="og:description" content="Mais de 10 mil itens, atendimento que orienta e preço honesto. Fale com um consultor no WhatsApp.">
 <meta property="og:url" content="https://www.novaferragista.com.br/">
 <meta property="og:image" content="https://www.novaferragista.com.br/assets/img/og-image.jpg">
@@ -49,7 +49,21 @@
     "addressCountry": "BR"
   },
   "openingHours": ["Mo-Fr 07:00-18:00", "Sa 07:00-12:00"],
-  "sameAs": ["https://www.instagram.com/novaferragista_/"]
+  "sameAs": ["https://www.instagram.com/novaferragista_/"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Produtos mais procurados",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Tinta spray" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Espuma expansiva" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Cola PU" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Assento sanitário almofadado oval" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Conexões hidráulicas" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Disjuntores elétricos" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Disco de corte diamantado" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Thinner" } }
+    ]
+  }
 }
 </script>
 
@@ -264,6 +278,23 @@ a { color: var(--accent-text); text-decoration: none; }
 .help strong { display: block; font-family: var(--font-display); text-transform: uppercase; font-size: var(--text-xl); color: var(--heading); letter-spacing: 0.01em; margin-bottom: 4px; }
 .help p { color: var(--muted); }
 
+/* Produtos mais procurados */
+.prods { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+.prod { display: flex; flex-direction: column; background: var(--nf-white); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; box-shadow: var(--shadow-xs); transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out), border-color 300ms; scroll-margin-top: calc(var(--header-h) + 16px); }
+.prod:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--nf-amarelo-500); }
+.prod__media { aspect-ratio: 4 / 5; background: var(--bg-alt); overflow: hidden; }
+.prod__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 700ms var(--ease-out); }
+.prod:hover .prod__media img { transform: scale(1.05); }
+.prod__media--icon { display: flex; align-items: center; justify-content: center; background: var(--nf-ink-950); background-image: radial-gradient(circle at 30% 20%, rgba(232,192,8,0.18), transparent 60%); }
+.prod__icon { width: 96px; height: 96px; border-radius: 28px; display: flex; align-items: center; justify-content: center; background: var(--nf-amarelo-500); color: var(--nf-ink-950); transform: rotate(-6deg); }
+.prod__icon .i { width: 48px; height: 48px; }
+.prod__body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4); flex: 1; }
+.prod h3 { font-size: var(--text-lg); }
+.prod p { font-size: 14px; color: var(--muted); line-height: 1.45; flex: 1; }
+.prod__cta { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--space-2); font-family: var(--font-display); text-transform: uppercase; letter-spacing: var(--tracking-caps); font-weight: 600; font-size: 13px; color: var(--heading); min-height: 44px; }
+.prod__cta:hover { color: var(--accent-text); }
+.prod__cta .btn__wa { width: 26px; height: 26px; } .prod__cta .i--wa { width: 15px; height: 15px; }
+
 /* B2B — painel escuro */
 .panel { border-radius: var(--r-lg); background: var(--nf-ink-950); color: var(--nf-ink-200); overflow: hidden; display: grid; }
 .panel__body { padding: var(--space-10) var(--space-6); }
@@ -416,6 +447,8 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
   .bento { grid-template-columns: 1fr 1fr; }
   .bento__feature { grid-column: 1 / -1; }
   .cats { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+  .prods { grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .prod__body { padding: var(--space-5); }
   .cat { padding: var(--space-6); }
   .help { flex-direction: row; align-items: center; justify-content: space-between; padding: var(--space-6) var(--space-8); }
   .panel__body { padding: var(--space-16) var(--space-12); }
@@ -448,6 +481,7 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
   .bento { grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; }
   .bento__feature { grid-column: 1; grid-row: 1 / span 2; min-height: 460px; }
   .cats { grid-template-columns: repeat(4, 1fr); }
+  .prods { grid-template-columns: repeat(4, 1fr); }
   .panel { grid-template-columns: 1.1fr 0.9fr; }
   .panel__media { min-height: 100%; }
   .split { grid-template-columns: 1fr 1fr; gap: var(--space-16); }
@@ -506,7 +540,7 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
       <span class="brand__name">Nova <span>Ferragista</span></span>
     </a>
     <nav class="nav" aria-label="Seções">
-      <a href="#categorias">Produtos</a>
+      <a href="#produtos">Produtos</a>
       <a href="#obras">Para obras</a>
       <a href="#loja">A loja</a>
       <a href="#duvidas">Dúvidas</a>
@@ -529,8 +563,8 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
   <div class="hero__inner">
     <div>
       <span class="chip" data-open-status><span class="dot"></span><span data-open-text>Seg a Sex 7h–18h · Sáb 7h–12h</span></span>
-      <h1>Tudo o que sua obra precisa, com quem te ajuda a <span class="hl">comprar certo</span>.</h1>
-      <p class="lead">Ferragens, ferramentas, hidráulica, elétrica, EPIs, pintura e muito mais em um só lugar. Atendimento consultivo e preço honesto pra você comprar certo e não perder tempo.</p>
+      <h1>A ferragista <span class="hl">perto de você</span> em Aparecida de Goiânia.</h1>
+      <p class="lead">No Jardim Monte Serrat, com mais de 10 mil itens: ferragens, ferramentas, hidráulica, elétrica, EPIs e pintura. Uma das ferragistas mais bem avaliadas da região, com atendimento que te ajuda a comprar certo.</p>
       <div class="actions">
         <a class="btn btn--primary btn--block-m" data-cta="cta_whatsapp_hero" target="_blank" rel="noopener"
            href="https://wa.me/556241035123?text=Ol%C3%A1!%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20falar%20com%20um%20consultor.">
@@ -659,12 +693,12 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
       <p>Da obra grande ao reparo de casa — tem na Nova Ferragista.</p>
     </div>
     <div class="cats">
-      <article class="card card--hover cat reveal"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-nut"/></svg></span><h3>Ferragens</h3><p>Parafusos, fechaduras, dobradiças e o que mais sua obra pedir.</p></article>
+      <article class="card card--hover cat reveal"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-nut"/></svg></span><h3>Ferragens</h3><p>Parafusos, fechaduras, dobradiças, espuma expansiva, cola PU e o que mais sua obra pedir.</p></article>
       <article class="card card--hover cat reveal" style="--d:1"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-hammer"/></svg></span><h3>Ferramentas</h3><p>Manuais e elétricas pra trabalho que rende.</p></article>
       <article class="card card--hover cat reveal" style="--d:2"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-drill"/></svg></span><h3>Máquinas</h3><p>A potência certa pra cada serviço.</p></article>
-      <article class="card card--hover cat reveal" style="--d:3"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span><h3>Elétrica</h3><p>Fios, disjuntores, tomadas e acabamento.</p></article>
-      <article class="card card--hover cat cat--star reveal"><span class="badge">Nosso forte</span><span class="icon-chip"><svg class="i" aria-hidden="true"><use href="#i-droplets"/></svg></span><h3>Hidráulica</h3><p>Conexões, tubos e tudo pra não ter vazamento.</p></article>
-      <article class="card card--hover cat reveal" style="--d:1"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-roller"/></svg></span><h3>Material de pintura</h3><p>Tintas, pincéis, rolos e acessórios.</p></article>
+      <article class="card card--hover cat reveal" style="--d:3"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span><h3>Elétrica</h3><p>Fios, disjuntores elétricos, tomadas e acabamento.</p></article>
+      <article class="card card--hover cat cat--star reveal"><span class="badge">Nosso forte</span><span class="icon-chip"><svg class="i" aria-hidden="true"><use href="#i-droplets"/></svg></span><h3>Hidráulica</h3><p>Conexões hidráulicas, tubos, assento sanitário e tudo pra não ter vazamento.</p></article>
+      <article class="card card--hover cat reveal" style="--d:1"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-roller"/></svg></span><h3>Material de pintura</h3><p>Tintas, tinta spray, thinner, pincéis, rolos e acessórios.</p></article>
       <article class="card card--hover cat reveal" style="--d:2"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-hardhat"/></svg></span><h3>EPIs</h3><p>Proteção pra trabalhar seguro.</p></article>
       <article class="card card--hover cat reveal" style="--d:3"><span class="icon-chip icon-chip--soft"><svg class="i" aria-hidden="true"><use href="#i-spray"/></svg></span><h3>Limpeza e conservação</h3><p>Pra manter tudo em ordem.</p></article>
     </div>
@@ -682,8 +716,101 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
   </div>
 </section>
 
+<!-- 6b. PRODUTOS MAIS PROCURADOS (palavras-chave das campanhas de pesquisa) -->
+<section class="section section--alt" id="produtos" aria-labelledby="prod-t">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Mais procurados</div>
+      <h2 id="prod-t">Produtos que você <span class="hl">encontra aqui</span></h2>
+      <p>Assento sanitário, espuma expansiva, cola PU, tinta spray, conexões hidráulicas, disjuntores elétricos e muito mais, direto na loja do Jardim Monte Serrat.</p>
+    </div>
+    <div class="prods">
+      <article class="prod reveal" id="assento-sanitario">
+        <div class="prod__media"><img src="assets/img/produtos/assento-sanitario-360.webp" srcset="assets/img/produtos/assento-sanitario-360.webp 360w, assets/img/produtos/assento-sanitario.webp 600w" sizes="(min-width: 1024px) 280px, 50vw" width="360" height="450" alt="Assento sanitário almofadado oval Atlas na embalagem" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Assento sanitário almofadado</h3>
+          <p>Assento sanitário oval, modelo universal, almofadado e com tampa. Parafusos reguláveis para encaixar na louça.</p>
+          <a class="prod__cta" data-cta="cta_produto_assento_sanitario" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20assento%20sanit%C3%A1rio%20almofadado%20oval.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="espuma-expansiva" style="--d:1">
+        <div class="prod__media"><img src="assets/img/produtos/espuma-expansiva-360.webp" srcset="assets/img/produtos/espuma-expansiva-360.webp 360w, assets/img/produtos/espuma-expansiva.webp 600w" sizes="(min-width: 1024px) 280px, 50vw" width="360" height="450" alt="Lata de espuma expansiva Mundial Prime 500 ml" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Espuma expansiva</h3>
+          <p>Espuma expansiva de poliuretano para vedação e fixação de portas e janelas. Expande até 3 vezes e não encolhe.</p>
+          <a class="prod__cta" data-cta="cta_produto_espuma_expansiva" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20espuma%20expansiva.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="cola-pu" style="--d:2">
+        <div class="prod__media"><img src="assets/img/produtos/cola-pu-360.webp" srcset="assets/img/produtos/cola-pu-360.webp 360w, assets/img/produtos/cola-pu.webp 600w" sizes="(min-width: 1024px) 280px, 50vw" width="360" height="450" alt="Tubo de cola PU 40 Cibra, selante de poliuretano" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Cola PU (selante de poliuretano)</h3>
+          <p>Cola PU para vedar e colar concreto, rufos, calhas, pisos, granito e metal. Não trinca e permanece flexível.</p>
+          <a class="prod__cta" data-cta="cta_produto_cola_pu" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20cola%20PU.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="tinta-spray" style="--d:3">
+        <div class="prod__media prod__media--icon"><span class="prod__icon"><svg class="i" aria-hidden="true"><use href="#i-spray"/></svg></span></div>
+        <div class="prod__body">
+          <h3>Tinta spray</h3>
+          <p>Spray para pintura de metal, madeira e acabamentos. Chama no WhatsApp para consultar cores e marcas disponíveis.</p>
+          <a class="prod__cta" data-cta="cta_produto_tinta_spray" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20tinta%20spray.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="conexoes-hidraulicas">
+        <div class="prod__media"><img src="assets/img/hidraulica-400.webp" width="400" height="300" alt="Parede de conexões hidráulicas e acessórios para banheiro na loja" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Conexões hidráulicas</h3>
+          <p>Conexões hidráulicas, tubos, registros e acessórios para sua obra ou reparo. Hidráulica é o nosso forte.</p>
+          <a class="prod__cta" data-cta="cta_produto_conexoes_hidraulicas" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20conex%C3%B5es%20hidr%C3%A1ulicas.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="disjuntores" style="--d:1">
+        <div class="prod__media prod__media--icon"><span class="prod__icon"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span></div>
+        <div class="prod__body">
+          <h3>Disjuntores elétricos</h3>
+          <p>Disjuntores elétricos para quadro de distribuição, junto com fios, tomadas e acabamento para a parte elétrica.</p>
+          <a class="prod__cta" data-cta="cta_produto_disjuntores" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20disjuntores%20el%C3%A9tricos.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="disco-de-corte" style="--d:2">
+        <div class="prod__media"><img src="assets/img/produtos/disco-corte-360.webp" srcset="assets/img/produtos/disco-corte-360.webp 360w, assets/img/produtos/disco-corte.webp 600w" sizes="(min-width: 1024px) 280px, 50vw" width="360" height="450" alt="Disco de corte diamantado Cortag para porcelanato" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Disco de corte diamantado</h3>
+          <p>Disco de corte diamantado para porcelanato e cerâmica, 110 mm. Corte limpo para assentamento de piso.</p>
+          <a class="prod__cta" data-cta="cta_produto_disco_de_corte" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20disco%20de%20corte%20diamantado.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+      <article class="prod reveal" id="thinner" style="--d:3">
+        <div class="prod__media"><img src="assets/img/produtos/thinner-360.webp" srcset="assets/img/produtos/thinner-360.webp 360w, assets/img/produtos/thinner.webp 600w" sizes="(min-width: 1024px) 280px, 50vw" width="360" height="450" alt="Latas de thinner Brasilux de 900 ml e 5 litros" loading="lazy"></div>
+        <div class="prod__body">
+          <h3>Thinner e diluentes</h3>
+          <p>Thinner Brasilux em 900 ml e 5 litros para diluir tinta e limpar ferramentas de pintura.</p>
+          <a class="prod__cta" data-cta="cta_produto_thinner" target="_blank" rel="noopener" href="https://wa.me/556241035123?text=Ol%C3%A1%21%20Vim%20pela%20p%C3%A1gina%20da%20Nova%20Ferragista%20e%20quero%20saber%20pre%C3%A7o%20e%20disponibilidade%20de%20thinner.">
+            <span class="btn__wa"><svg class="i i--wa" aria-hidden="true"><use href="#i-wa"/></svg></span> Consultar no WhatsApp
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- 7. B2B -->
-<section class="section" id="obras" style="padding-top:0" aria-labelledby="b2b-t">
+<section class="section" id="obras" aria-labelledby="b2b-t">
   <div class="container">
     <div class="panel dark reveal">
       <div class="panel__body">
@@ -841,6 +968,10 @@ a.info__item:hover { border-color: var(--nf-amarelo-500); transform: translateX(
       <details>
         <summary>Vocês têm o produto que eu preciso?<span class="plus"><svg class="i i--sm" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
         <p>Com mais de 10 mil itens, provavelmente sim. Chama no WhatsApp que a gente confirma na hora.</p>
+      </details>
+      <details>
+        <summary>Vocês têm tinta spray, espuma expansiva e cola PU?<span class="plus"><svg class="i i--sm" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>
+        <p>Sim. Também temos assento sanitário almofadado e oval, conexões hidráulicas, disjuntores elétricos, disco de corte e thinner. Chama no WhatsApp para confirmar cor, medida e disponibilidade.</p>
       </details>
       <details>
         <summary>Vocês fazem entrega?<span class="plus"><svg class="i i--sm" aria-hidden="true"><use href="#i-plus"/></svg></span></summary>

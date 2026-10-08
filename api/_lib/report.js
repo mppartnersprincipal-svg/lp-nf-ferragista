@@ -5,10 +5,10 @@ import { TZ_OFFSET_MS, localDate } from './period.js';
 // Seções da LP, na ordem de leitura. A chave vem do tracker: id da <section>, aria-labelledby sem "-t"
 // ou id do bloco pai (hero = #topo).
 export const SECTIONS = {
-  home: ['topo', 'numeros', 'dores', 'dif', 'categorias', 'obras', 'sobre', 'loja', 'como', 'avaliacoes', 'duvidas', 'final', 'contato'],
+  home: ['topo', 'numeros', 'dores', 'dif', 'categorias', 'produtos', 'obras', 'sobre', 'loja', 'como', 'avaliacoes', 'duvidas', 'final', 'contato'],
 };
 export const SECTION_LABEL = {
-  topo: 'Hero', numeros: 'Números', dores: 'Dores', dif: 'Diferenciais', categorias: 'Categorias',
+  topo: 'Hero', numeros: 'Números', dores: 'Dores', dif: 'Diferenciais', categorias: 'Categorias', produtos: 'Produtos mais procurados',
   obras: 'Construtores e empresas', sobre: 'Sobre', loja: 'Por dentro da loja', como: 'Como funciona',
   avaliacoes: 'Avaliações', duvidas: 'FAQ', final: 'CTA final', contato: 'Localização',
 };

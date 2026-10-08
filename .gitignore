@@ -4,3 +4,6 @@ desktop.ini
 node_modules/
 .env.local
 .vercel/
+
+.vercel
+.env*
